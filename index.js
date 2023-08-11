@@ -13,12 +13,12 @@ window.addEventListener('DOMContentLoaded',  async () => {
 
         let html = ''
         querySnapshot.forEach(doc => {
-            //console.log(doc.data())
-            const task  = doc.data()
+            console.log(doc.data())
+            const userLocation  = doc.data()
             html += `
             <div class="card card-body mt-2 border-primary">
-                <h3 class="h5">${task.title}</h3>
-                <p >${task.description}</p>
+                <h3 class="h5">${userLocation.latitude}</h3>
+                <p >${userLocation.longitude}</p>
                 <div>
                 <button class="btn-delete btn btn-success" type="button" data-id="${doc.id}">Delete</button>
                 <button class="btn-update btn btn-info" type="button" data-id="${doc.id}">Update</button>
@@ -49,10 +49,10 @@ window.addEventListener('DOMContentLoaded',  async () => {
 
                 const doc = await getTask(dataset.id)
                 //console.log(doc.data())
-                const task = doc.data()
+                const userLocation = doc.data()
 
-                taskform['task-title'].value = task.title
-                taskform['task-description'].value = task.description
+                taskform['task-title'].value = userLocation.latitude
+                taskform['task-description'].value = userLocation.longitude
                 edit_status = true
                 id=doc.id;
                 taskform['btn-task-save'].innerHTML = "update"
@@ -68,22 +68,22 @@ taskform.addEventListener('submit', (e) => {
     e.preventDefault()
     //console.log('submitted');
 
-    const title = taskform['task-title'];
-    const description = taskform['task-description'];
+    const latitude = taskform['task-title'];
+    const longitude = taskform['task-description'];
 
     //console.log(title.value,description.value);
     if (edit_status){
         //console.log('Actualizando')
         updateTask(id,{
-            title:title.value,
-            description: description.value
+            latitude:latitude.value,
+            longitude: longitude.value
         });
         edit_status = false;
-        taskform['btn-task-save'].innerHTML = "Guardar"
+        taskform['btn-task-save'].innerHTML = "Guardar" 
 
     }else{
         console.log('Guardando')
-        saveTask(title.value,description.value)
+        saveTask(latitude.value,longitude.value)
     }
     
     taskform.reset();
