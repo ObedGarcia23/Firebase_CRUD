@@ -26,14 +26,14 @@
 
   export const saveTask = (title,description) => 
     //console.log(title, description);
-    addDoc(collection(db,"tasks"), {title, description});
+    addDoc(collection(db,"userLocation"), {title, description});
   
-export const getTasks = () => getDocs(collection(db,"tasks"));
+export const getTasks = () => getDocs(collection(db,"userLocation"));
 
-export const onGetTasks = (callback) => onSnapshot(collection(db,"tasks"), callback); 
+export const onGetTasks = (callback) => onSnapshot(collection(db,"userLocation"), callback); 
 
-export const deleteTasks = (id) => deleteDoc(doc(db,"tasks",id));
+export const deleteTasks = (id) => deleteDoc(doc(db,"userLocation",id));
 
-export const  getTask = (id) => getDoc(doc(db,"tasks",id));
+export const  getTask = (id) => getDoc(doc(db,"userLocation",id));
 
-export const updateTask = (id,newFields) => updateDoc(doc(db,"tasks",id),newFields);
+export const updateTask = (id,newFields) => updateDoc(doc(db,"userLocation",id),newFields);
